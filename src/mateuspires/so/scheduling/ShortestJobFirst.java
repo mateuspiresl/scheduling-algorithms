@@ -17,9 +17,6 @@ public class ShortestJobFirst extends SchedulingAlgorithm {
 	@Override
 	protected int compareProcesses(Process a, Process b)
 	{
-		// Program.log(a.getSimpleInfo() + " / " + b.getSimpleInfo());
-		// Program.log((a.arrived < this.clock) + " " + (b.arrived < this.clock) + " " + (a.arrived != b.arrived));
-		
 		if ((a.arrived > this.clock || b.arrived > this.clock) && a.arrived != b.arrived)
 			return a.arrived - b.arrived;
 		

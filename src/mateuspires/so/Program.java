@@ -14,27 +14,27 @@ public class Program {
 	public static void main(String[] args)
 	{
 		ArrayList<Process> processes = new ArrayList<>();
-		Scanner in = new Scanner(System.in);
 		
-		while (in.hasNext())
+		try (Scanner in = new Scanner(System.in))
 		{
-			int arrived = in.nextInt();
-			int duration = in.nextInt();
-			
-			if (arrived == 0 && duration == 0) break;
-			
-			processes.add(new Process(arrived, duration));
+			while (in.hasNext())
+			{
+				int arrived = in.nextInt();
+				int duration = in.nextInt();
+				
+				if (arrived == 0 && duration == 0) break;
+				
+				processes.add(new Process(arrived, duration));
+			}
 		}
 		
-		in.close();
-		
-		System.out.println("FCFS");
+		System.out.print("FCFS ");
 		analyse(new FirstComeFirstServed().add(processes).run());
 		
-		System.out.println("\nSJF");
+		System.out.print("SJF ");
 		analyse(new ShortestJobFirst().add(processes).run());
 		
-		System.out.println("\nRR");
+		System.out.print("RR ");
 		analyse(new RoundRobin(2).add(processes).run());
 	}
 	
@@ -49,7 +49,7 @@ public class Program {
 			returnTime += process.getReturnTime() / (float) processes.size();
 		}
 		
-		System.out.println("waiting: " + waitingTime + ", response: " + responseTime + ", return: " + returnTime);
+		System.out.println(returnTime + " " + responseTime + " " + waitingTime);
 	}
 	
 	public static void log(Object text) {
